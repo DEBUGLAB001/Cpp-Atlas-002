@@ -3,16 +3,114 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Atlas Search</title>
+  <meta name="theme-color" content="#f8f9f6">
+  <meta name="description" content="Explore a fast, thoughtfully ranked product search index with instant suggestions and typo recovery.">
+  <title>Atlas — Search workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <main class="shell">
-    <header class="topbar"><div class="brand"><span class="brand-mark">A</span><div><strong>Atlas Search</strong><span>Product discovery workspace</span></div></div><div class="status"><i></i> Local index online</div></header>
-    <section class="hero"><div><p class="eyebrow">PRODUCT DISCOVERY / LIVE SEARCH</p><h1>Make every query<br><em>feel understood.</em></h1><p class="lede">Find the right resource faster with instant suggestions, ranked matches, and helpful typo recovery.</p></div><div class="hero-stat"><span>INDEXED TERMS</span><b id="word-count">—</b><small>ready for exploration</small></div></section>
-    <section class="workspace"><div class="search-panel"><label for="query">Try a query</label><div class="search-box"><span>⌕</span><input id="query" autocomplete="off" placeholder="Type “auto”, “system”, or a typo…"><button id="clear" title="Clear query">×</button></div><div class="chips"><button data-query="auto">auto</button><button data-query="system">system</button><button data-query="autocorect">autocorect</button></div><div id="correction" class="correction" hidden></div></div><div class="results-panel"><div class="result-head"><div><span class="eyebrow">LIVE OUTPUT</span><h2 id="result-title">Suggestions</h2></div><span id="result-count" class="count">0 matches</span></div><div id="results" class="results"><div class="empty"><span>⌁</span><p>Start typing to traverse the index</p><small>Prefix suggestions appear instantly</small></div></div></div></section>
-    <footer><span>ATLAS SEARCH <b>·</b> C++17</span><span>Autocomplete <b>·</b> Spell check <b>·</b> Search</span></footer>
-  </main>
+  <div class="background-art" aria-hidden="true">
+    <span class="ambient-orb ambient-orb-one"></span>
+    <span class="ambient-orb ambient-orb-two"></span>
+    <svg class="background-landscape" viewBox="0 0 760 440" fill="none" aria-hidden="true">
+      <circle class="landscape-sun" cx="578" cy="88" r="48"/>
+      <path class="landscape-hill landscape-hill-back" d="M0 337c110-20 150-115 264-119 99-3 126 82 223 80 96-2 138-91 273-75v217H0V337Z"/>
+      <path class="landscape-hill landscape-hill-front" d="M0 365c123-41 195-50 287-27 92 23 134 49 229 35 88-13 144-70 244-75v142H0v-75Z"/>
+      <path class="landscape-route" d="M40 369c73-13 111-16 159-7 47 9 55 30 102 31 47 0 66-25 107-24 41 0 51 19 91 19 40 0 54-19 90-22 37-4 57 4 100-5"/>
+      <g class="compass" transform="translate(405 153)">
+        <circle r="33"/>
+        <path d="M0-24 6-5 24 0 6 5 0 24-6 5-24 0-6-5 0-24Z"/>
+        <circle r="3"/>
+      </g>
+      <path class="landscape-spark" d="M403 141v14m-7-7h14M673 275v10m-5-5h10"/>
+    </svg>
+    <span class="background-grain"></span>
+  </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Atlas Search home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none"><path d="M18 5.5 31 29H5L18 5.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M18 14.2 24.7 26H11.3L18 14.2Z" fill="currentColor"/></svg>
+        </span>
+        <span class="brand-copy"><strong>atlas</strong><span>Search workspace</span></span>
+      </a>
+      <div class="topbar-right">
+        <span class="environment"><span class="environment-dot" aria-hidden="true"></span><span id="environment-status">Checking index</span></span>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <span class="engine-label">C++17 search engine</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>DISCOVER WITH ATLAS</p>
+          <h1 id="page-title">Find your next<br><span>great idea.</span></h1>
+          <p class="intro-lede">Search a curated collection of resources. Atlas understands what you mean, even when the spelling isn't quite right.</p>
+        </div>
+        <aside class="index-card" aria-label="Index status">
+          <span class="index-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5h16M4 12h16M4 17.5h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="18" cy="17.5" r="2.5" stroke="currentColor" stroke-width="1.7"/></svg>
+          </span>
+          <span class="index-label">SEARCHABLE CATALOG</span>
+          <span class="index-value" id="word-count">—</span>
+          <span class="index-caption">resources indexed and ready</span>
+        </aside>
+      </section>
+
+      <section class="search-workspace" aria-label="Search workspace">
+        <div class="search-column">
+          <form id="search-form" class="search-card" role="search">
+            <label for="query">What are you looking for?</label>
+            <div class="search-control">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input id="query" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Try “auto”, “system”, or a typo…" aria-describedby="search-hint">
+              <button id="clear" class="clear-button" type="button" aria-label="Clear search" title="Clear search" hidden>
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </button>
+              <button class="submit-button" type="submit">Search <span aria-hidden="true">↵</span></button>
+            </div>
+            <div class="search-footnote" id="search-hint"><span>Suggestions update as you type</span><span class="keyboard-hint"><kbd>ENTER</kbd> to search all</span></div>
+            <div id="correction" class="correction" role="status" hidden></div>
+          </form>
+
+          <div class="popular-searches">
+            <span class="popular-label">TRY A SEARCH</span>
+            <div class="chips" aria-label="Suggested searches">
+              <button type="button" data-query="auto"><span class="chip-dot" aria-hidden="true"></span>auto</button>
+              <button type="button" data-query="system"><span class="chip-dot" aria-hidden="true"></span>system</button>
+              <button type="button" data-query="autocorect"><span class="chip-dot" aria-hidden="true"></span>autocorect</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="results-card" aria-labelledby="result-title">
+          <div class="results-header">
+            <div class="results-heading">
+              <span class="results-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 6.5h14M5 12h14M5 17.5h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              </span>
+              <div><p class="eyebrow">YOUR RESULTS</p><h2 id="result-title">Suggestions</h2></div>
+            </div>
+            <span id="result-count" class="count" aria-live="polite">0 matches</span>
+          </div>
+          <div id="results" class="results" aria-live="polite" aria-busy="false">
+            <div class="empty">
+              <span class="empty-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><circle cx="21.5" cy="21.5" r="13.5" stroke="currentColor" stroke-width="1.8"/><path d="m32 32 9 9M16 21.5h11M21.5 16v11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+              <p>Start with a word or phrase</p>
+              <small>Your matching suggestions will appear here.</small>
+            </div>
+          </div>
+          <div class="results-footer"><span><span class="footer-pulse" aria-hidden="true"></span>Live index</span><span>Ranked by relevance</span></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="page-footer"><span>© 2026 Atlas Search</span><span>Thoughtful discovery, made simple.</span></footer>
+  </div>
   <script src="./app.js"></script>
 </body>
 </html>
