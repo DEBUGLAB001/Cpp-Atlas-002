@@ -17,7 +17,7 @@ How to identify it: Open the Live Preview and type `auto` in the search field. D
 Your task: Ensure autocomplete suggestions are sorted in descending order of popularity so that the highest relevance match appears first (`autocomplete` at 98%, `autocorrect` at 96%, and `autocomplete api` at 82%).
 
 <p align="center">
-  <img src="https://files.catbox.moe/tv4p4b.png" alt="BUG-01: Prefix Autocomplete Is Ranked in the Wrong Order" width="720" />
+  <img src="docs/images/bug-01.png" alt="BUG-01: Prefix Autocomplete Is Ranked in the Wrong Order" width="720" />
 </p>
 
 ### BUG-02: Full Search Only Checks the Beginning of a Phrase
@@ -29,7 +29,7 @@ How to identify it: Enter `search` in the search field and press Enter (or click
 Your task: Ensure search evaluates whether the query occurs anywhere within indexed terms, returning both `search suggestions` and `binary search` in descending relevance order.
 
 <p align="center">
-  <img src="https://files.catbox.moe/aag14z.png" alt="BUG-02: Full Search Only Checks the Beginning of a Phrase" width="720" />
+  <img src="docs/images/bug-02.png" alt="BUG-02: Full Search Only Checks the Beginning of a Phrase" width="720" />
 </p>
 
 ### BUG-03: Spell Autocorrect Does Not Recover a Close Typo
@@ -41,7 +41,7 @@ How to identify it: Type the misspelled word `autocorect` (single `r` after `o`)
 Your task: Ensure the autocorrect routine returns the closest matching catalog term, enabling the UI to surface the `Did you mean autocorrect?` suggestion and allow users to recover their intended search term.
 
 <p align="center">
-  <img src="https://files.catbox.moe/mium1m.png" alt="BUG-03: Spell Autocorrect Does Not Recover a Close Typo" width="720" />
+  <img src="docs/images/bug-03.png" alt="BUG-03: Spell Autocorrect Does Not Recover a Close Typo" width="720" />
 </p>
 
 ### BUG-04: Empty-Query Suggestions Ignore the Result Limit
@@ -53,7 +53,7 @@ How to identify it: Type any search query and then click the `×` clear control 
 Your task: Ensure empty-query autocomplete requests respect the configured result limit (e.g. maximum 6 items), returning a bounded suggestion list ranked consistently by relevance rather than rendering the entire catalog.
 
 <p align="center">
-  <img src="https://files.catbox.moe/pkeorv.png" alt="BUG-04: Empty-Query Suggestions Ignore the Result Limit" width="720" />
+  <img src="docs/images/bug-04.png" alt="BUG-04: Empty-Query Suggestions Ignore the Result Limit" width="720" />
 </p>
 
 ## 2. Get Familiar With the Application
